@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- vue instance에 router instance를 연결해 사용 -->
+    <div>
+      <router-link to="/login">Login</router-link>
+      <router-link to="/main">Main</router-link>
+    </div>
+    <!-- url이 변경되었을때 특정 컴퍼넌트가 표출되는데, 그 컴포넌트가 표출될 영역 -->
+    <router-view></router-view>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script>
+    var LoginComponent = {
+      template: '<div>login</div>'
+    }
+
+    var MainComponent = {
+      template: '<div>main</div>'
+    }
+
+    var router = new VueRouter({
+      // 페이지의 라우팅 정보
+
+      // 일반적으로 브라우저 이동시 #(해시) 를 통해 브라우저의 history api를 사용하는데,
+      // 이를 사용안하기 위해서는 mode 에 history 값을 설정하면 된다.
+      mode: 'history',
+
+      // 페이지 마다 뿌려질 component는 하나, 그래서 component가 아니다
+      routes: [
+        {
+          // page의 url 이름
+          path: '/login',
+          name: 'login',
+          // 해당 url에서 표시될 컴포넌트
+          component: LoginComponent
+        },
+        {
+          path: '/main',
+          name: 'main',
+          component: MainComponent
+        }
+      ]
+    });
+
+    // 인스턴스 or 컴포넌트을 등록할때는 여러개를 등록하기 때문에 components 다.
+    new Vue({
+      el: '#app',
+      router: router
+    });
+  </script>
+</body>
+</html>

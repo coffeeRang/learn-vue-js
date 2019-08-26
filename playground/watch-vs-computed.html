@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    {{ num }}
+
+  </div>
+  <!-- https://jsonplaceholder.typicode.com/users/ -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        num: 10
+
+      },
+      // vue 내부적으로 계산하는 속성, 데이터의 의존성 : doubleNum이란 로직이 실행할 때 기준이 되는 값이 data의 num의 속성, 빠르게 작동됨
+      // validation 또는 간단한 텍스트 연산
+      computed: {
+        doubleNum: function() {
+          return this.num * 2;
+        }
+      },
+      // data의 num이 변경될때 로직을 실행
+      // 데이터 요청 등 무거운 요청에 적합하다.
+      watch: {
+        num: function(newValue, oldValue) {
+          this.fetchUserByNumber(newValue);
+        }
+      },
+      methods: {
+        fetchUserByNumber: function(num) {
+          // console.log(num);
+          // axios.get(num);
+
+        }
+
+      }
+
+    })
+  </script>
+</body>
+</html>
